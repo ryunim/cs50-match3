@@ -26,6 +26,12 @@ function Tile:init(x, y, color, variety)
     -- tile appearance/points
     self.color = color
     self.variety = variety
+    
+    if math.random(20) < 10 then
+        self.shiny = true
+    else
+        self.shiny = false
+    end
 end
 
 function Tile:render(x, y)
@@ -39,4 +45,13 @@ function Tile:render(x, y)
     love.graphics.setColor(255, 255, 255, 255)
     love.graphics.draw(gTextures['main'], gFrames['tiles'][self.color][self.variety],
         self.x + x, self.y + y)
+
+    if self.shiny then
+        love.graphics.setColor(255, 255, 1, 150/255)
+
+        love.graphics.setLineWidth(4)
+        love.graphics.rectangle('line', self.x + (VIRTUAL_WIDTH - 272),
+        self.y + 16, 32, 32, 4)
+
+    end
 end
